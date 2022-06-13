@@ -54,11 +54,12 @@ protected:
 class Triangle : public Figure //треугольник скц
 {
 public:
-	Triangle() { sides_count = 3; this->name = "Треугольник:"; };
+	Triangle() { sides_count = 3; }
 	Triangle(int a,int b,int c, int A, int B, int C) 
 	{
 		this->a = a; this->b = b; this->c = c; 
 		this->A = A; this->B = B; this->C = C; 
+		this->name = "Треугольник:";
 	};
 
 	std::string get_sides()
@@ -74,13 +75,13 @@ public:
 
 	void print_info() override
 	{
-		std::cout << Triangle::get_name() << "\n" << Triangle::get_corn() << Triangle::get_sides() << "" << " " << " " << "\n"; // 
+		std::cout << Triangle::get_name() << "\n"  << Triangle::get_sides() << Triangle::get_corn() << "" << " " << " " << "\n"; // 
 	}
 	
 
 protected:
-	int a, b, c;
-	int A, B, C;
+	int a=0, b=0, c=0;
+	int A=0, B=0, C=0;
 
 private:
 
@@ -98,7 +99,7 @@ private:
 };
 
 
-class Isosceles_triangle:Triangle // равнобедренный треугольник
+class Isosceles_triangle:public Triangle // равнобедренный треугольник
 {
 public:
 	Isosceles_triangle(int a,int c,int A,int B):Triangle(a,a,c,A,B,A)
@@ -126,12 +127,13 @@ private:
 class Quadrangle : public Figure
 {
 public:
-	Quadrangle() { sides_count = 4; this->name = "Четырехугольник:"; };
+	Quadrangle() { sides_count = 4;};
 
 	Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D)
 	{
 		this->a = a; this->b = b; this->c = c; this->d = d;
 		this->A = A; this->B = B; this->C = C; this->D = D;
+		this->name = "Четырехугольник:";
 	}
 
 	std::string get_sides()
@@ -143,6 +145,10 @@ public:
 	{
 		std::string buf = { "Углы: A=" + std::to_string(A) + " B=" + std::to_string(B) + " C=" + std::to_string(C) + " D=" + std::to_string(D) + "\n" };
 		return buf;
+	}
+	void print_info() override
+	{
+		std::cout << Quadrangle::get_name() << "\n"  << Quadrangle::get_sides() << Quadrangle::get_corn() << "" << "\n"; // 
 	}
 
 protected:
@@ -163,10 +169,7 @@ public:
 		this->name = "Параллелограм: ";
 	}
 
-	void print_info() override
-	{
-		std::cout << Quadrangle::get_name() << "\n" << Quadrangle::get_corn() << Quadrangle::get_sides() << "" << "\n"; // 
-	}
+	
 private:
 
 };
@@ -215,41 +218,39 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	//std::string q = "привт";
-	//std::string w = "Hello";
-	//std::string e;
-	//std::cout << q << " " << w << " " << std::endl;
-	//std::cin >> e;
-	//std::cout << e;
-
-
-
-	Quadrangle q = {};
-	//Triangle t = {};
 	Figure f = {};
-	Parallelogram pr = { 0,0,0,0 };
-	My_Rectangle rc = { 10,10 };
-	Square sq = { 5 };
-	Rhomb rh = { 5,90,90 };
-	Equilateral_triangle et = { 10 };
-	Isosceles_triangle it = { 10,20,70,40 };
-	Rectangular_triangle rt = { 20,40,20,30,60 };
+	Triangle triagle = {10,20,30,50,60,70};
+	Rectangular_triangle r_triagle = {10,20,30,50,60};
+	Isosceles_triangle i_triagle = { 10,20,10,60};
+	Equilateral_triangle e_triagle = { 10 };
 
-	//std::cout << "Количество сторон:" << std::endl << f.get_name() << " " << f.get_sides_count() << "\n"
-	//	<< t.get_name() << " " << t.get_sides_count() << "\n"
-	//	<< q.get_name() << " " << q.get_sides_count() << std::endl;
+	Quadrangle quadrangle = {10,20,30,40,50,60,70,80}; // четырех угольник
+	My_Rectangle rectangle = { 10,20 };//прямоугольник
+	Square square = { 20 }; // квадрат
+	Parallelogram parallelogram = { 20,30,30,40 }; //параллелограмм
+	Rhomb rhomb = { 30,30,40 }; // ромб
 
-	/*std::cout <<pr.get_name() << " " << pr.get_corn() << pr.get_sides() << "" << " " << " " << "\n";
-	std::cout << rc.get_name() << " "<<rc.get_corn() << rc.get_sides() << "" << " " << " " << "\n";
-	std::cout << sq.get_name() << " "<< sq.get_corn() << sq.get_sides() << "" << " " << " " << "\n" << "\n";*/
 	
-	Figure* pSquare = &sq;
-	Figure* pRhomb = &rh;
-	Figure* pEquilateral_triangle = &et;
-	
-   pSquare->print_info();
-   pRhomb->print_info();
-   pEquilateral_triangle->print_info();
+	Figure* p_triagle = &triagle;
+	Figure* p_equilateral_triangle = &e_triagle;
+	Figure* p_isosceles_triangle = &i_triagle;
+	Figure* p_rectangular_triangle = &r_triagle;
 
+	Figure* p_rectangle = &rectangle;
+	Figure* p_quadrangle = &quadrangle;
+	Figure* p_square = &square;
+	Figure* p_parallelogram = &parallelogram;
+	Figure* p_rhomb = &rhomb;
+  
+p_triagle->print_info();
+p_rectangular_triangle->print_info();
+p_isosceles_triangle->print_info();
+p_equilateral_triangle->print_info();
+
+p_quadrangle->print_info();
+p_rectangle->print_info();
+p_square->print_info();
+p_parallelogram->print_info();
+p_rhomb->print_info();
 	return 0;
 }
